@@ -105,7 +105,8 @@ public class LightsOn {
                     System.out.println(++stepCount + ". Toggling " + n.name);
                     n.toggle();
                     print();
-                }            
+                }
+                
             }
             max = max - 2;
         }
