@@ -1,3 +1,17 @@
+/**
+ *
+ * Created by Dan Bent (2952542)  and Malix Moore (4971777) for COSC326, Etude 6: Lights On To Off
+ *
+ * A program to solve a "Lights Out"-style puzzle.
+ *
+ *
+ *
+ *
+ **/
+
+
+
+
 package lightson;
 
 import java.util.HashMap;
@@ -16,18 +30,18 @@ public class LightsOn {
     private int edgeCount = 0;
     private int nodeCount = 0;
     private int stepCount = 0;
+    private final int MAX_ITERATIONS = 3;
 
+    
+    /**
+     * Constructor - scans graph config from stdin.
+     * Splits input and creates new Nodes
+     **/
     public LightsOn() {
         nodes = new ArrayList<Node>();
         sc = new Scanner(System.in);
         String[] tempLights, tempJoins;
 
-        
-
-        if (!sc.hasNextLine()) {
-            System.out.println("Enter an input file on stdin");
-            return;
-        }
         //Split the lines (first is lights, second is joins)
         tempLights = sc.nextLine().split(" ");
         tempJoins = sc.nextLine().split(" ");
@@ -35,13 +49,17 @@ public class LightsOn {
         edgeCount = tempLights.length;
         // Add new nodes for each light
         for (String s : tempLights) {
+            if (s.length() > 1) {
+                System.out.println("Error: Node names must be a single character");
+                return;
+            }
             nodes.add(new Node(s.toLowerCase()));
         }
         sc.close();
         // Add the joins for each light
         for (String s : tempJoins) {
             String one = s.substring(0, 1).toLowerCase();
-            String two = s.substring(1, 2).toLowerCase(); // Change these names
+            String two = s.substring(1, 2).toLowerCase();
             Node tempOne = getNode(one);
             Node tempTwo = getNode(two);
             if (tempOne != null && tempTwo != null) {
@@ -51,7 +69,11 @@ public class LightsOn {
     
     }
 
-    // Get node from array by its name
+    /**
+     * Get node from array by its name
+     * params - String name of light
+     * returns - Node object corresponding to the given name
+     **/
     public Node getNode(String name) {
         for (Node n : nodes) {
             if (n.name.equals(name)) {
@@ -59,56 +81,75 @@ public class LightsOn {
             }
         }
         return null;    }
-
+    
+    /**
+     * Prints out current state of graph to stdin
+     **/
     public void print() {
         System.out.println("State:");
         for (Node n : nodes) {
-            System.out.println(n.name + " " + n.isOn);
+            String label = n.isOn ? "-ON-" : "off";
+            System.out.println(n.name.toUpperCase() + ":  " + label);
         }
     }
 
     public void solve() {
-        int max = getMaxJoins();
-        Boolean isEvenNodes = nodeCount % 2 == 0;
-        if (isEvenNodes) {
-            if (max % 2 == 0) max--;
-        } else {
-            if (max % 2 != 0) max--;
-        }
-        while (max > 0) {
-            for (Node n : nodes) {
-                if (areAllOff()) {
-                    System.out.println("Solved in " + stepCount + " moves!");
-                    return;
+        System.out.println("---Solving puzzle with " + nodeCount + " lights---");
+        for (int i = 0; i < MAX_ITERATIONS; i++) {
+            int max = getMaxJoins();
+            int reduce = 2;
+            Boolean isEvenNodes = nodeCount % 2 == 0;
+            while (max >= 0) {
+                if (isEvenNodes) {
+                    if (max % 2 == 0) max--;
+                } else {
+                    if (max % 2 != 0) max--;
                 }
-                if (n.isOn && n.getJoinCount() == max) {
-                    System.out.println(++stepCount + ". Toggling " + n.name);
-                    n.toggle();
-                    print();
-                }            
+                for (Node n : nodes) {
+                    if (areAllOff()) {
+                        System.out.println("Solved in " + stepCount + " moves!");
+                        print();
+                        return;
+                    }
+                    if (n.isOn
+                        && n.getJoinCount() == max
+                        && n.getJoinCount() == n.getOnCount()
+                        && n.getJoinCount() != 0) {
+                        System.out.println(++stepCount + ". Toggling light " + n.name.toUpperCase());
+                        n.toggle();
+                    }            
+                }
+                if (max == 1) {
+                    max = 0;
+                } else {
+                    max = max - reduce;
+                }
             }
-            max = max - 2;
-        }
-        max = getMaxJoins();
-        if (isEvenNodes) {
-            if (max % 2 != 0) max--;
-        } else {
-            if (max % 2 == 0) max--;
-        }
-        while (max > 0) {
+        
             for (Node n : nodes) {
-                if (areAllOff()) {
-                    System.out.println("Solved in " + stepCount + " moves!");
-                    return;
-                }
-                if (n.isOn && n.getJoinCount() == max) {
-                    System.out.println(++stepCount + ". Toggling " + n.name);
-                    n.toggle();
-                    print();
-                }
                 
+                if (areAllOff()) {
+                    System.out.println("Solved in " + stepCount + " moves!");
+                    print();
+                    return;
+                }
+                if (n.isOn && n.getJoinCount() != 0) {
+                    System.out.println(++stepCount + ". Toggling light " + n.name.toUpperCase());
+                    n.toggle();
+                }
             }
-            max = max - 2;
+            for (Node n : nodes) {
+                
+                if (areAllOff()) {
+                    System.out.println("Solved in " + stepCount + " moves!");
+                    print();
+                    return;
+                }
+                if (n.isOn) {
+                    System.out.println(++stepCount + ". Toggling light " + n.name.toUpperCase());
+                    n.toggle();
+                }
+            }
         }
         System.out.println("Unsolvable. Closest solution was: ");
         print();
@@ -121,6 +162,9 @@ public class LightsOn {
         return n.isOn;
     }
 
+    /**
+     * returns - true if all lights are off, else false
+     **/
     public Boolean areAllOff() {
         for (Node n : nodes) {
             if (n.isOn) return false;
@@ -128,6 +172,9 @@ public class LightsOn {
         return true;
     }
 
+    /**
+     * returns - maximum join count from set of all lights
+     **/
     public int getMaxJoins() {
         int max = 0;
         for (Node n : nodes) {
@@ -137,6 +184,10 @@ public class LightsOn {
         }
         return max;
     }
+
+    /**
+     * A Node is a light. Stores on/off state, light name, and references to all lights it affects
+     **/
 
     public class Node implements Comparable {
         
@@ -162,6 +213,14 @@ public class LightsOn {
             for (Node n : this.joins) {
                 n.isOn = !n.isOn;
             }
+        }
+
+        public int getOnCount() {
+            int count = 0;
+            for (Node n : joins) {
+                if (n.isOn) count++;
+            }
+            return count;
         }
 
         public int getJoinCount() {

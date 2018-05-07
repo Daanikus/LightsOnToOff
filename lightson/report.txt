@@ -1,0 +1,19 @@
+The problem in Lights On To Off is to turn all the lights off from an initial state of all on. The problem is made more complex in that one light switch may control more than one light. This can lead to situations where a light is turned back on indirectly after having been turned off. The solution involves switching the lights in such a way as to achieve a final configuration of all off.
+
+We found that we could achieve acceptable solutions to our test problems by ranking the lights to toggle, first switching the most influential lights (a light that affects the largest amount of other lights), then going down to any light that remains on. The algorithm implemented goes through three levels of light ranking. Each level of ranking descends through the list of nodes from most to least outgoing edges.
+
+The first stage invoves switching lights that:
+a) are on
+b) have the correct number of outgoing edges
+c) all lights that it is connected to are on
+d) has at least one other light connected to it
+
+Throughout the algorithm, there is constant state checks to see whether all lights are off. If they are, the algorithm stops and returns the solution. If after this first stage a solution is not found, it moves to a lower and more enclusive ranking.
+
+The second stage involves switching lights that:
+a) are on
+b) has at least one other light connected to it
+
+If at this stage no solution has been reached, any remaining lights that are on are switched off.
+
+In the rare event that no solution is reached at this stage, the entire algorithm is run again on any remaing lights. The total number of iterations through the entire array is limited to 3 in this implementation, as it seems as though any puzzle not solved within this time is unsolvable.
