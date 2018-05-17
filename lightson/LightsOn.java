@@ -80,7 +80,8 @@ public class LightsOn {
                 return n;
             }
         }
-        return null;    }
+        return null;
+    }
     
     /**
      * Prints out current state of graph to stdin
@@ -95,22 +96,32 @@ public class LightsOn {
 
     public void solve() {
         System.out.println("---Solving puzzle with " + nodeCount + " lights---");
+        // It may take one or two runs through this loop to achieve an 'all off' state.
+        // We have limited this to 3, as any more will usually be the result of a cycle
+        // that cannot be solved
         for (int i = 0; i < MAX_ITERATIONS; i++) {
             int max = getMaxJoins();
-            int reduce = 2;
+            final int REDUCE = 2;
+            // Even number of nodes in graph
             Boolean isEvenNodes = nodeCount % 2 == 0;
             while (max >= 0) {
+                // If nodes count is even, reduce max by one so we deal with odd edges 
                 if (isEvenNodes) {
+                    // If max edges is even, reduce it to make it odd
                     if (max % 2 == 0) max--;
+                    // If node count is odd and max edges is odd, reduce by one to make even (inverse parity)    
                 } else {
                     if (max % 2 != 0) max--;
-                }
+                    }
                 for (Node n : nodes) {
+                    // Check if all lights are off
                     if (areAllOff()) {
                         System.out.println("Solved in " + stepCount + " moves!");
                         print();
                         return;
                     }
+                    // If the node is on, has 'max' amount of edges, all lights it affects are on
+                    // and it affects at least one other light: switch it 
                     if (n.isOn
                         && n.getJoinCount() == max
                         && n.getJoinCount() == n.getOnCount()
@@ -122,10 +133,13 @@ public class LightsOn {
                 if (max == 1) {
                     max = 0;
                 } else {
-                    max = max - reduce;
+                    max = max - REDUCE;
                 }
             }
-        
+
+            // If first loop didn't turn all lights off, lower the criteria:
+            // If the node is on and affects at least one other light, toggle it
+            // Constantly check for 'all off' state
             for (Node n : nodes) {
                 
                 if (areAllOff()) {
@@ -138,6 +152,8 @@ public class LightsOn {
                     n.toggle();
                 }
             }
+
+            // If some lights are still on by this stage, turn them off
             for (Node n : nodes) {
                 
                 if (areAllOff()) {
