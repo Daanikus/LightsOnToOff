@@ -1,0 +1,274 @@
+1
+
+---Solving puzzle with 4 lights---
+1. Toggling light B
+2. Toggling light C
+Solved in 2 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+---Solving puzzle with 4 lights---
+1. Toggling light B
+2. Toggling light C
+3. Toggling light A
+4. Toggling light C
+5. Toggling light D
+6. Toggling light C
+Solved in 6 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+---Solving puzzle with 9 lights---
+1. Toggling light A
+2. Toggling light F
+3. Toggling light G
+4. Toggling light I
+5. Toggling light B
+6. Toggling light H
+7. Toggling light G
+Solved in 7 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+E:  off
+F:  off
+G:  off
+H:  off
+I:  off
+---Solving puzzle with 7 lights---
+1. Toggling light D
+2. Toggling light C
+3. Toggling light F
+4. Toggling light G
+5. Toggling light A
+6. Toggling light D
+7. Toggling light E
+8. Toggling light B
+9. Toggling light G
+Solved in 9 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+E:  off
+F:  off
+G:  off
+---Solving puzzle with 13 lights---
+1. Toggling light A
+2. Toggling light C
+3. Toggling light K
+4. Toggling light L
+5. Toggling light M
+6. Toggling light E
+7. Toggling light G
+8. Toggling light H
+9. Toggling light K
+10. Toggling light L
+Solved in 10 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+E:  off
+F:  off
+G:  off
+H:  off
+I:  off
+J:  off
+K:  off
+L:  off
+M:  off
+---Solving puzzle with 7 lights---
+1. Toggling light A
+2. Toggling light D
+3. Toggling light B
+4. Toggling light C
+5. Toggling light E
+6. Toggling light A
+7. Toggling light B
+8. Toggling light F
+9. Toggling light G
+10. Toggling light D
+Solved in 10 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+E:  off
+F:  off
+G:  off
+---Solving puzzle with 9 lights---
+1. Toggling light G
+2. Toggling light I
+3. Toggling light A
+4. Toggling light C
+5. Toggling light D
+6. Toggling light E
+7. Toggling light G
+8. Toggling light H
+9. Toggling light C
+10. Toggling light E
+11. Toggling light F
+12. Toggling light I
+13. Toggling light C
+14. Toggling light F
+15. Toggling light I
+Solved in 15 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+E:  off
+F:  off
+G:  off
+H:  off
+I:  off
+
+59
+
+
+Reduce
+
+---Solving puzzle with 4 lights---
+1. Toggling light B
+2. Toggling light C
+Solved in 2 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+---Solving puzzle with 4 lights---
+1. Toggling light B
+2. Toggling light C
+3. Toggling light A
+4. Toggling light C
+5. Toggling light D
+6. Toggling light C
+Solved in 6 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+---Solving puzzle with 9 lights---
+1. Toggling light A
+2. Toggling light F
+3. Toggling light G
+4. Toggling light I
+5. Toggling light B
+6. Toggling light H
+7. Toggling light G
+Solved in 7 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+E:  off
+F:  off
+G:  off
+H:  off
+I:  off
+---Solving puzzle with 7 lights---
+1. Toggling light D
+2. Toggling light C
+3. Toggling light F
+4. Toggling light G
+5. Toggling light A
+6. Toggling light D
+7. Toggling light E
+8. Toggling light B
+9. Toggling light G
+Solved in 9 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+E:  off
+F:  off
+G:  off
+---Solving puzzle with 7 lights---
+1. Toggling light A
+2. Toggling light D
+3. Toggling light B
+4. Toggling light C
+5. Toggling light E
+6. Toggling light A
+7. Toggling light B
+8. Toggling light F
+9. Toggling light G
+10. Toggling light D
+Solved in 10 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+E:  off
+F:  off
+G:  off
+---Solving puzzle with 9 lights---
+1. Toggling light G
+2. Toggling light I
+3. Toggling light A
+4. Toggling light C
+5. Toggling light D
+6. Toggling light E
+7. Toggling light G
+8. Toggling light H
+9. Toggling light C
+10. Toggling light E
+11. Toggling light F
+12. Toggling light I
+13. Toggling light C
+14. Toggling light F
+15. Toggling light I
+Solved in 15 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+E:  off
+F:  off
+G:  off
+H:  off
+I:  off
+---Solving puzzle with 13 lights---
+1. Toggling light A
+2. Toggling light C
+3. Toggling light K
+4. Toggling light L
+5. Toggling light M
+6. Toggling light E
+7. Toggling light G
+8. Toggling light H
+9. Toggling light K
+10. Toggling light L
+Solved in 10 moves!
+State:
+A:  off
+B:  off
+C:  off
+D:  off
+E:  off
+F:  off
+G:  off
+H:  off
+I:  off
+J:  off
+K:  off
+L:  off
+M:  off
