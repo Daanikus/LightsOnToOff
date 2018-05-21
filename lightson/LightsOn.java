@@ -30,13 +30,13 @@ public class LightsOn {
     private int edgeCount = 0;
     private int nodeCount = 0;
     private int stepCount = 0;
-    private final int MAX_ITERATIONS = 3;
+    private final int MAX_ITERATIONS = 10;
 
     
     /**
      * Constructor - scans graph config from stdin.
      * Splits input and creates new Nodes
-     **/
+     */
     public LightsOn() {
         nodes = new ArrayList<Node>();
         sc = new Scanner(System.in);
@@ -71,9 +71,9 @@ public class LightsOn {
 
     /**
      * Get node from array by its name
-     * params - String name of light
-     * returns - Node object corresponding to the given name
-     **/
+     * @param - String name of light
+     * @return - Node object corresponding to the given name
+     */
     public Node getNode(String name) {
         for (Node n : nodes) {
             if (n.name.equals(name)) {
@@ -94,25 +94,17 @@ public class LightsOn {
         }
     }
 
+    /**
+     * Solves the provided lights puzzle
+     */
     public void solve() {
         System.out.println("---Solving puzzle with " + nodeCount + " lights---");
         // It may take one or two runs through this loop to achieve an 'all off' state.
-        // We have limited this to 3, as any more will usually be the result of a cycle
-        // that cannot be solved
+        // We have limited this to 10, as any more will usually be the result of a cycle
+        // that cannot be solved, but gives some wiggle room for large puzzles
         for (int i = 0; i < MAX_ITERATIONS; i++) {
             int max = getMaxJoins();
-            final int REDUCE = 2;
-            // Even number of nodes in graph
-            Boolean isEvenNodes = nodeCount % 2 == 0;
             while (max >= 0) {
-                // If nodes count is even, reduce max by one so we deal with odd edges 
-                if (isEvenNodes) {
-                    // If max edges is even, reduce it to make it odd
-                    if (max % 2 == 0) max--;
-                    // If node count is odd and max edges is odd, reduce by one to make even (inverse parity)    
-                } else {
-                    if (max % 2 != 0) max--;
-                    }
                 for (Node n : nodes) {
                     // Check if all lights are off
                     if (areAllOff()) {
@@ -130,18 +122,14 @@ public class LightsOn {
                         n.toggle();
                     }            
                 }
-                if (max == 1) {
-                    max = 0;
-                } else {
-                    max = max - REDUCE;
-                }
+                max--;
             }
 
             // If first loop didn't turn all lights off, lower the criteria:
             // If the node is on and affects at least one other light, toggle it
             // Constantly check for 'all off' state
+            
             for (Node n : nodes) {
-                
                 if (areAllOff()) {
                     System.out.println("Solved in " + stepCount + " moves!");
                     print();
@@ -152,10 +140,8 @@ public class LightsOn {
                     n.toggle();
                 }
             }
-
             // If some lights are still on by this stage, turn them off
             for (Node n : nodes) {
-                
                 if (areAllOff()) {
                     System.out.println("Solved in " + stepCount + " moves!");
                     print();
@@ -171,7 +157,11 @@ public class LightsOn {
         print();
     }
 
-    // Toggle node and all joined nodes
+    /**
+     * Toggle node and all joined nodes
+     * @param the string name of the node to toggle
+     * @return true if the node/light is on, else false
+     */
     public Boolean toggleNode(String s) {
         Node n = getNode(s);
         n.toggle();
@@ -179,8 +169,8 @@ public class LightsOn {
     }
 
     /**
-     * returns - true if all lights are off, else false
-     **/
+     * @return true if all lights are off, else false
+     */
     public Boolean areAllOff() {
         for (Node n : nodes) {
             if (n.isOn) return false;
@@ -189,8 +179,8 @@ public class LightsOn {
     }
 
     /**
-     * returns - maximum join count from set of all lights
-     **/
+     * @return maximum join count from set of all lights
+     */
     public int getMaxJoins() {
         int max = 0;
         for (Node n : nodes) {
@@ -203,7 +193,7 @@ public class LightsOn {
 
     /**
      * A Node is a light. Stores on/off state, light name, and references to all lights it affects
-     **/
+     */
 
     public class Node implements Comparable {
         
